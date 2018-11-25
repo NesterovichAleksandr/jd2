@@ -17,12 +17,12 @@ public class CmdListReservedTicket extends Cmd {
 
     @Override
     public Cmd execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        User user = Utils.getUser(req,resp);
+        User user = Utils.getUser(req, resp);
         if (user == null) {
             return Action.LOGIN.cmd;
         }
         Dao dao = Dao.getDao();
-        List<ReservedTicket> reservedTickets = dao.reservedTicket.getAll(" WHERE `users_id`=" + Utils.getUser(req,resp).getId());
+        List<ReservedTicket> reservedTickets = dao.reservedTicket.getAll(" WHERE `users_id`=" + Utils.getUser(req, resp).getId());
         List<Film> films = dao.film.getAll("");
         List<Cinema> cinemas = dao.cinema.getAll("");
         if (reservedTickets.size() > 0) {

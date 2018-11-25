@@ -16,7 +16,7 @@ public class CmdLogin extends Cmd {
 
     @Override
     public Cmd execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        User user = Utils.getUser(req,resp);
+        User user = Utils.getUser(req, resp);
         if (user != null) {
             return Action.USERCABINET.cmd;
         }
@@ -33,7 +33,7 @@ public class CmdLogin extends Cmd {
                 session.setAttribute("userId", users.get(0).getId());
                 session.setAttribute("userLogin", login);
 
-                Utils.setCookieUser(resp,login,password);
+                Utils.setCookieUser(resp, login, password);
 
                 return Action.USERCABINET.cmd;
             } else {

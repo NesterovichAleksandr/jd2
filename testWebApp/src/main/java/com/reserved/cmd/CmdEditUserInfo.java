@@ -15,7 +15,7 @@ public class CmdEditUserInfo extends Cmd {
     @Override
     public Cmd execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         if (Form.isPost(req)) {
-            User user = Utils.getUser(req,resp);
+            User user = Utils.getUser(req, resp);
             String login = Form.getString(req.getParameter("login"), Patterns.LOGIN);
             String email = Form.getString(req.getParameter("email"), Patterns.EMAIL);
             String password = Form.getString(req.getParameter("password"), Patterns.PASSWORD);

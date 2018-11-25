@@ -145,7 +145,7 @@ public class DataBase {
             statement.executeUpdate("INSERT INTO `nesterovich`.`reserved_tickets` (`id`, `code`, `cost`, `users_id`, `films_id`, `cinemas_id`) VALUES (DEFAULT, 25686533, 5.7, 2, 2, 2);");
             statement.executeUpdate("INSERT INTO `nesterovich`.`reserved_tickets` (`id`, `code`, `cost`, `users_id`, `films_id`, `cinemas_id`) VALUES (DEFAULT, 76532453, 4.2, 2, 3, 3);");
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

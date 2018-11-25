@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 public class CmdCreateReservedTicket extends Cmd {
     @Override
     public Cmd execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        User user = Utils.getUser(req,resp);
+        User user = Utils.getUser(req, resp);
         if (user == null) {
             return Action.LOGIN.cmd;
         }
@@ -25,7 +25,7 @@ public class CmdCreateReservedTicket extends Cmd {
             if (req.getParameter("reservButton") != null) {
                 long idFilm = (long) session.getAttribute("IdFilm");
                 long idUser = user.getId();
-                long idCinema =Form.getLong(req, "cinemaId");
+                long idCinema = Form.getLong(req, "cinemaId");
                 ReservedTicket reservedTicket = new ReservedTicket(
                         0,
                         11111111,

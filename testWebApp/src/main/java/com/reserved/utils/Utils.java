@@ -29,14 +29,14 @@ public class Utils {
                 }
                 if ("password".equals(cookie.getName())) {
                     String valueCookie = cookie.getValue();
-                    password = valueCookie.substring(0,valueCookie.length()-6);
+                    password = valueCookie.substring(0, valueCookie.length() - 6);
                 }
             }
             if (login != null && password != null) {
                 Dao dao = Dao.getDao();
                 String where = String.format(" WHERE Login='%s' AND PASSWORD='%s'", login, password);
                 List<User> users = dao.user.getAll(where);
-                if (users.size()==0){
+                if (users.size() == 0) {
                     return null;
                 }
                 req.getSession().setMaxInactiveInterval(30);

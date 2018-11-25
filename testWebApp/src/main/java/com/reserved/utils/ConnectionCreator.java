@@ -21,7 +21,7 @@ public class ConnectionCreator {
         } catch (ClassNotFoundException e) {
             System.out.println("Error loading driver: " + e);
         } catch (SQLException e) {
-            System.out.println("Error: not register driver:  "+e);
+            System.out.println("Error: not register driver:  " + e);
         }
     }
 
