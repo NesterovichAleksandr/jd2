@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC ""
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="by.pvt.pojo">
+    <class name="Person">
+        <id name="id">
+            <generator class="increment"/>
+        </id>
+        <property name="age"/>
+        <property name="dateOfBirth" type="timestamp"/>
+        <property name="name"/>
+        <property name="secondName"/>
+    </class>
+</hibernate-mapping>
