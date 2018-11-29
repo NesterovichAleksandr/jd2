@@ -12,17 +12,17 @@ public class Person implements Serializable {
 
     private static final long serialVersionUID = -1781191857792849355L;
 
-    private Integer id;
+    private String id;
     private String name;
     private String secondName;
     private int age;
     private Date dateOfBirth;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
