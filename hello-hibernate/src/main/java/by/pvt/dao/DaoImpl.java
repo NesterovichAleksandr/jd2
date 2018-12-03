@@ -10,6 +10,16 @@ import java.io.Serializable;
 
 public class DaoImpl<T> {
 
+    private Class<T> persistentClass;
+
+    public DaoImpl(Class<T> type) {
+        this.persistentClass = type;
+    }
+
+    public Class<T> getPersistentClass() {
+        return persistentClass;
+    }
+
     public T saveOrUpdate(T t) {
         Session session = HibernateUtil.getInstance().getSession();
         Transaction transaction = null;
@@ -28,16 +38,18 @@ public class DaoImpl<T> {
 
     @NotNull
     public T load(Serializable id) {
+        if (id == null) throw new IllegalArgumentException("Persistent instance id must not be null");
         Session session = HibernateUtil.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         T t = null;
         try {
-            t = (T) session.load(t.getClass(), id);
+            t = session.load(getPersistentClass(), id);
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
             transaction.rollback();
         }
+        if (t == null) throw new IllegalStateException("Persistence instance doesn't exist");
         return t;
     }
 
@@ -47,7 +59,7 @@ public class DaoImpl<T> {
         Transaction transaction = session.beginTransaction();
         T t = null;
         try {
-            t = (T) session.get(t.getClass(), id);
+            t = session.get(getPersistentClass(), id);
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();

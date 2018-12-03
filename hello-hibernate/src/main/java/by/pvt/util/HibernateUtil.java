@@ -4,11 +4,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-
 public class HibernateUtil {
 
-    static ThreadLocal<Session> threadLocal = new ThreadLocal<>();
-    private static SessionFactory sessionFactory;
+    private ThreadLocal<Session> threadLocal = new ThreadLocal<>();
+    private SessionFactory sessionFactory;
 
     private static HibernateUtil hibernateUtil;
 
@@ -25,7 +24,7 @@ public class HibernateUtil {
         return hibernateUtil;
     }
 
-    public static Session getSession() {
+    public Session getSession() {
         Session session = threadLocal.get();
         if (session == null) {
             session = sessionFactory.openSession();
@@ -33,5 +32,4 @@ public class HibernateUtil {
         }
         return session;
     }
-
 }
