@@ -83,7 +83,7 @@ public class DaoImplTest {
         } catch (Exception e) {
             e.printStackTrace();
             assertTrue(e instanceof IllegalArgumentException);
-            //HibernateUtil.getInstance().getSession().getTransaction().rollback();
+            HibernateUtil.getInstance().getSession().getTransaction().rollback();
         }
         dao.updateName(person.getId(), "Petia");
         person = dao.load(person.getId());
