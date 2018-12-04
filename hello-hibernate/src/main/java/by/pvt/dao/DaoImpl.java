@@ -1,6 +1,8 @@
 package by.pvt.dao;
 
+import by.pvt.pojo.Person;
 import by.pvt.util.HibernateUtil;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.jetbrains.annotations.NotNull;
@@ -66,5 +68,20 @@ public class DaoImpl<T> {
             transaction.rollback();
         }
         return t;
+    }
+
+    public void updateName(Serializable id, String name){
+        Session session = HibernateUtil.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            Person person = (Person) session.get(getPersistentClass(), id);
+            person.setName(name);
+            session.flush();
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            transaction.rollback();
+        }
     }
 }

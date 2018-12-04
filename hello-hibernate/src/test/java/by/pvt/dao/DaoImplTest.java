@@ -1,6 +1,7 @@
 package by.pvt.dao;
 
 import by.pvt.pojo.Person;
+import by.pvt.util.HibernateUtil;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -54,7 +55,11 @@ public class DaoImplTest {
             assertEquals(e.getClass(), IllegalStateException.class);
         }
         Serializable id = dao.saveOrUpdate(new Person()).getId();
-        assertNotNull(dao.load(id));
+        Person loaderPerson = dao.load(id);
+        assertNotNull(loaderPerson);
+        assertNotNull(loaderPerson.getId());
+        assertEquals(id, loaderPerson.getId());
+
     }
 
     @Test
@@ -63,5 +68,25 @@ public class DaoImplTest {
         assertNull(dao.find("testID"));
         Serializable id = dao.saveOrUpdate(new Person()).getId();
         assertNotNull(dao.find(id));
+    }
+
+    @Test
+    public void updateName() {
+        Person person = new Person();
+        person.setName("Vasia");
+        person.setSecondName("Ivanov");
+        person = dao.saveOrUpdate(person);
+        assertNotNull(person.getId());
+
+        try {
+            dao.updateName(null, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            assertTrue(e instanceof IllegalArgumentException);
+            //HibernateUtil.getInstance().getSession().getTransaction().rollback();
+        }
+        dao.updateName(person.getId(), "Petia");
+        person = dao.load(person.getId());
+        assertEquals(person.getName(), "Petia");
     }
 }
