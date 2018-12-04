@@ -84,4 +84,18 @@ public class DaoImpl<T> {
             transaction.rollback();
         }
     }
+
+    public void delete(Serializable id){
+        Session session = HibernateUtil.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            T t = session.get(getPersistentClass(), id);
+            session.delete(t);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            transaction.rollback();
+        }
+    }
 }

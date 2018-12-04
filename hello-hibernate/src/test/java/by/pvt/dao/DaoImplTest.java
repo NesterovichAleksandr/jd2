@@ -89,4 +89,15 @@ public class DaoImplTest {
         person = dao.load(person.getId());
         assertEquals(person.getName(), "Petia");
     }
+
+    @Test
+    public void delete() {
+        Person person = new Person();
+        Serializable id = dao.saveOrUpdate(person).getId();
+        assertNotNull(id);
+
+        dao.delete(id);
+        assertNull(dao.find(id));
+        System.out.println(person);
+    }
 }

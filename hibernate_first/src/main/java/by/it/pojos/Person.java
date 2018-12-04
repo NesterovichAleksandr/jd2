@@ -11,7 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Data
-//@NoArgsConstructor
+@NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
 @Entity
@@ -29,14 +29,4 @@ public class Person {
 
     @Column
     private String surname;
-
-    public Person() {
-    }
-
-    public Person(Integer id, int age, String name, String surname) {
-        this.id = id;
-        this.age = age;
-        this.name = name;
-        this.surname = surname;
-    }
 }
