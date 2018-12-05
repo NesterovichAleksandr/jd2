@@ -59,7 +59,6 @@ public class DaoImplTest {
         assertNotNull(loaderPerson);
         assertNotNull(loaderPerson.getId());
         assertEquals(id, loaderPerson.getId());
-
     }
 
     @Test
@@ -77,16 +76,30 @@ public class DaoImplTest {
         person.setSecondName("Ivanov");
         person = dao.saveOrUpdate(person);
         assertNotNull(person.getId());
+        assertEquals(person.getName(), "Vasia");
 
-        try {
-            dao.updateName(null, null);
-        } catch (Exception e) {
-            e.printStackTrace();
-            assertTrue(e instanceof IllegalArgumentException);
-            HibernateUtil.getInstance().getSession().getTransaction().rollback();
-        }
+        System.out.println("contains(person): " + HibernateUtil.getInstance().getSession().contains(person));
+        //person POJO is connected with current session
         dao.updateName(person.getId(), "Petia");
+        assertEquals(person.getName(), "Petia");
+    }
+
+    @Test
+    public void updateNameWithExceptionAndRollback() {
+        Person person = new Person();
+        person.setName("Vasia");
+        person.setSecondName("Ivanov");
+        person = dao.saveOrUpdate(person);
+        assertNotNull(person.getId());
+        assertEquals(person.getName(), "Vasia");
+
+        // Throws exception, rollbacks transaction and closes session
+        dao.updateName(null, null);
+
+        System.out.println("contains(person): " + HibernateUtil.getInstance().getSession().contains(person));
+        //person POJO is disconnected from session and we need reread it
         person = dao.load(person.getId());
+        dao.updateName(person.getId(), "Petia");
         assertEquals(person.getName(), "Petia");
     }
 

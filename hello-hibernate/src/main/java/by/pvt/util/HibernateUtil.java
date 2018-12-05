@@ -26,7 +26,7 @@ public class HibernateUtil {
 
     public Session getSession() {
         Session session = threadLocal.get();
-        if (session == null) {
+        if (session == null || !session.isOpen()) {
             session = sessionFactory.openSession();
             threadLocal.set(session);
         }

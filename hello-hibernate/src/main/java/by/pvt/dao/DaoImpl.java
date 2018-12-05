@@ -28,11 +28,12 @@ public class DaoImpl<T> {
         try {
             transaction = session.beginTransaction();
             session.saveOrUpdate(t);
-            session.getTransaction().commit();
+            transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
             if (transaction != null) {
                 transaction.rollback();
+                session.close();
             }
         }
         return t;
@@ -50,6 +51,7 @@ public class DaoImpl<T> {
         } catch (Exception e) {
             e.printStackTrace();
             transaction.rollback();
+            session.close();
         }
         if (t == null) throw new IllegalStateException("Persistence instance doesn't exist");
         return t;
@@ -66,6 +68,7 @@ public class DaoImpl<T> {
         } catch (Exception e) {
             e.printStackTrace();
             transaction.rollback();
+            session.close();
         }
         return t;
     }
@@ -73,7 +76,6 @@ public class DaoImpl<T> {
     public void updateName(Serializable id, String name) {
         Session session = HibernateUtil.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-
         try {
             Person person = (Person) session.get(getPersistentClass(), id);
             person.setName(name);
@@ -82,13 +84,13 @@ public class DaoImpl<T> {
         } catch (Exception e) {
             e.printStackTrace();
             transaction.rollback();
+            session.close();
         }
     }
 
     public void delete(Serializable id) {
         Session session = HibernateUtil.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-
         try {
             T t = session.get(getPersistentClass(), id);
             session.delete(t);
@@ -96,6 +98,7 @@ public class DaoImpl<T> {
         } catch (Exception e) {
             e.printStackTrace();
             transaction.rollback();
+            session.close();
         }
     }
 
@@ -110,6 +113,7 @@ public class DaoImpl<T> {
         } catch (Exception e) {
             e.printStackTrace();
             transaction.rollback();
+            session.close();
         }
     }
 }
