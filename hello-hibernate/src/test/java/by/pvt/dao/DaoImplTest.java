@@ -100,4 +100,17 @@ public class DaoImplTest {
         assertNull(dao.find(id));
         System.out.println(person);
     }
+
+    @Test
+    public void refresh() {
+        Person person = new Person();
+        person.setName("Kolia");
+        person.setSecondName("Ivanov");
+        person = dao.saveOrUpdate(person);
+        assertNotNull(person.getId());
+
+        dao.updateName(person.getId(), "Vova");
+        dao.refresh(person, person.getId());
+        assertEquals(person.getName(), "Vova");
+    }
 }

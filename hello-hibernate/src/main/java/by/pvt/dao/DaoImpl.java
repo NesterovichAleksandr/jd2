@@ -70,7 +70,7 @@ public class DaoImpl<T> {
         return t;
     }
 
-    public void updateName(Serializable id, String name){
+    public void updateName(Serializable id, String name) {
         Session session = HibernateUtil.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -85,13 +85,27 @@ public class DaoImpl<T> {
         }
     }
 
-    public void delete(Serializable id){
+    public void delete(Serializable id) {
         Session session = HibernateUtil.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
         try {
             T t = session.get(getPersistentClass(), id);
             session.delete(t);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            transaction.rollback();
+        }
+    }
+
+    public void refresh(Serializable id, String name) {
+        Session session = HibernateUtil.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            Person person = (Person) session.get(getPersistentClass(), id);
+            person.setName(name);
+            session.refresh(person);
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
