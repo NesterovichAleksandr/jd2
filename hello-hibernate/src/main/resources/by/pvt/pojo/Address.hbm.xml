@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC ""
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="by.pvt.pojo">
+    <class name="Address">
+        <id name="id">
+            <generator class="increment"/>
+        </id>
+        <property name="appartmentNumber"/>
+        <property name="city"/>
+        <property name="country"/>
+        <property name="houseNumber"/>
+        <property name="officeNumber"/>
+        <property name="street"/>
+        <property name="zip"/>
+    </class>
+</hibernate-mapping>

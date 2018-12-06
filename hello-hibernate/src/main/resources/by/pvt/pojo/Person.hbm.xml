@@ -10,5 +10,11 @@
         <property name="dateOfBirth" type="timestamp"/>
         <property name="name"/>
         <property name="secondName"/>
+        <component name="address" class="Address">
+            <property name="city"/>
+            <property name="street"/>
+            <property name="houseNumber"/>
+            <property name="appartmentNumber"/>
+        </component>
     </class>
 </hibernate-mapping>

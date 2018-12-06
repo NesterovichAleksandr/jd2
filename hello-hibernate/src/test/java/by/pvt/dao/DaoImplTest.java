@@ -1,5 +1,6 @@
 package by.pvt.dao;
 
+import by.pvt.pojo.Address;
 import by.pvt.pojo.Person;
 import by.pvt.util.HibernateUtil;
 import org.junit.After;
@@ -125,5 +126,24 @@ public class DaoImplTest {
         dao.updateName(person.getId(), "Vova");
         dao.refresh(person, person.getId());
         assertEquals(person.getName(), "Vova");
+    }
+
+    @Test
+    public void savePersonWithAddress() {
+        Person person = new Person();
+        person.setName("Marina");
+        person.setSecondName("Ivanova");
+        Address address = new Address("Minsk", "Lenina", "10", 213);
+        person.setAddress(address);
+
+        person = dao.saveOrUpdate(person);
+
+        assertNotNull(person.getId());
+        assertNotNull(person.getAddress());
+
+        assertEquals("Minsk", person.getAddress().getCity());
+        assertEquals("Lenina", person.getAddress().getStreet());
+        assertEquals("10", person.getAddress().getHouseNumber());
+        System.out.println(person);
     }
 }
