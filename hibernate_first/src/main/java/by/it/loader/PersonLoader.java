@@ -1,18 +1,16 @@
 package by.it.loader;
 
-import by.it.pojos.Person;
-import by.it.util.HibernateUtil;
-
-import javax.persistence.EntityManager;
+import by.it.dao.DaoImpl;
 
 public class PersonLoader {
 
     public static void main(String[] args) {
-        Person person = new Person(null, 20, "Ivan", "Ivanov");
-        EntityManager entityManager = HibernateUtil.getEntityManager();
-        entityManager.getTransaction().begin();
-        entityManager.persist(person);
-        entityManager.getTransaction().commit();
-        HibernateUtil.close();
+        //Person person = new Person(null, 21, "Ivan", "Ivanov");
+        //System.out.println(person);
+
+        DaoImpl dao = new DaoImpl();
+
+        //dao.create(person);
+        System.out.println(dao.read(2));
     }
 }

@@ -1,44 +1,46 @@
 package by.it.util;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 public class HibernateUtil {
 
-    private static final EntityManagerFactory emFactory;
-    private static SessionFactory sessionFactory;
+    private ThreadLocal<Session> threadLocal = new ThreadLocal<>();
 
-    static {
-        emFactory = Persistence.createEntityManagerFactory("by.it");
-    }
+    private static SessionFactory sessionFactory;
+    private static HibernateUtil hibernateUtil;
 
     private HibernateUtil() {
         try {
-            Configuration configuration = new Configuration().configure();
-            StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
-                    .applySettings(configuration.getProperties());
-            sessionFactory = configuration.buildSessionFactory(builder.build());
-        } catch (Throwable e) {
-            //log.error("Initial SessionFactory creation failed. " + e);
-            throw new ExceptionInInitializerError(e);
+            StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder()
+                    .configure("hibernate.cfg.xml").build();
+            Metadata metadata = new MetadataSources(standardRegistry).getMetadataBuilder().build();
+            sessionFactory = metadata.getSessionFactoryBuilder().build();
+
+        } catch (HibernateException he) {
+            System.out.println("Session Factory creation failure");
+            throw he;
         }
     }
 
-    public static EntityManager getEntityManager() {
-        return emFactory.createEntityManager();
+    public static HibernateUtil getInstance() {
+        if (hibernateUtil == null) {
+            hibernateUtil = new HibernateUtil();
+        }
+        return hibernateUtil;
     }
 
-    public static void close() {
-        emFactory.close();
-    }
-
-    public static Session getSession() {
-        return sessionFactory.openSession();
+    public Session getSession() {
+        Session session = threadLocal.get();
+        if (session == null || !session.isOpen()) {
+            session = sessionFactory.openSession();
+            threadLocal.set(session);
+        }
+        return session;
     }
 }
