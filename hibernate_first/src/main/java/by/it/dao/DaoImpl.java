@@ -15,7 +15,10 @@ public class DaoImpl {
 
     public Person read(Integer id) {
         Session session = HibernateUtil.getInstance().getSession();
-        return session.load(Person.class, id);
+        session.beginTransaction();
+        Person person = session.load(Person.class, id);
+        session.getTransaction().commit();
+        return person;
     }
 
     public void delete(Person person) {
@@ -24,5 +27,4 @@ public class DaoImpl {
         session.delete(person);
         session.getTransaction().commit();
     }
-
 }
