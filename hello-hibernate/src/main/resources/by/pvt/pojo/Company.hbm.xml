@@ -20,5 +20,16 @@
             <property name="houseNumber"/>
             <property name="appartmentNumber"/>
         </component>
+
+        <joined-subclass name="Branch">
+            <key column="id"/>
+            <property name="branchName"/>
+            <property name="branchDirector"/>
+        </joined-subclass>
+        <joined-subclass name="HesdQuarter">
+            <key column="id"/>
+            <property name="derectorName"/>
+            <property name="backAccount"/>
+        </joined-subclass>
     </class>
 </hibernate-mapping>
