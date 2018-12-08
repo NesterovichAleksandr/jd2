@@ -11,7 +11,7 @@ public class AddressTest {
     @Test
     public void getId() {
         Address address = new Address("Minsk", "Stroiteley", "5", 24);
-        Session session = HibernateUtil.getInstance().getSession();
+        Session session = HibernateUtil.getInstance().getTestSession();
         session.saveOrUpdate(address);
 
         assertEquals(1L, address.getId());

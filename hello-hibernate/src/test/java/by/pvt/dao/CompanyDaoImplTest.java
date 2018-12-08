@@ -13,11 +13,13 @@ public class CompanyDaoImplTest {
     @Before
     public void setUp() {
         companyDao = new DaoImpl<>(Company.class);
+        companyDao.isTestInstance = true;
 
     }
 
     @After
     public void tearDown() {
+        companyDao.isTestInstance = false;
         companyDao = null;
     }
 

@@ -14,6 +14,8 @@ public class DaoImpl<T> {
 
     private Class<T> persistentClass;
 
+    public static boolean isTestInstance;
+
     public DaoImpl(Class<T> type) {
         this.persistentClass = type;
     }
@@ -22,8 +24,16 @@ public class DaoImpl<T> {
         return persistentClass;
     }
 
+    private Session getSession(){
+        if (isTestInstance){
+            return HibernateUtil.getInstance().getTestSession();
+        } else {
+            return HibernateUtil.getInstance().getSession();
+        }
+    }
+
     public T saveOrUpdate(T t) {
-        Session session = HibernateUtil.getInstance().getSession();
+        Session session = getSession();
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
@@ -42,7 +52,7 @@ public class DaoImpl<T> {
     @NotNull
     public T load(Serializable id) {
         if (id == null) throw new IllegalArgumentException("Persistent instance id must not be null");
-        Session session = HibernateUtil.getInstance().getSession();
+        Session session = getSession();
         Transaction transaction = session.beginTransaction();
         T t = null;
         try {
@@ -59,7 +69,7 @@ public class DaoImpl<T> {
 
     @Nullable
     public T find(Serializable id) {
-        Session session = HibernateUtil.getInstance().getSession();
+        Session session = getSession();
         Transaction transaction = session.beginTransaction();
         T t = null;
         try {
@@ -74,7 +84,7 @@ public class DaoImpl<T> {
     }
 
     public void updateName(Serializable id, String name) {
-        Session session = HibernateUtil.getInstance().getSession();
+        Session session = getSession();
         Transaction transaction = session.beginTransaction();
         try {
             Person person = (Person) session.get(getPersistentClass(), id);
@@ -89,7 +99,7 @@ public class DaoImpl<T> {
     }
 
     public void delete(Serializable id) {
-        Session session = HibernateUtil.getInstance().getSession();
+        Session session = getSession();
         Transaction transaction = session.beginTransaction();
         try {
             T t = session.get(getPersistentClass(), id);
@@ -103,7 +113,7 @@ public class DaoImpl<T> {
     }
 
     public void refresh(Serializable id, String name) {
-        Session session = HibernateUtil.getInstance().getSession();
+        Session session = getSession();
         Transaction transaction = session.beginTransaction();
         try {
             Person person = (Person) session.get(getPersistentClass(), id);

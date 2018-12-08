@@ -24,9 +24,9 @@ public class HibernateUtilTest {
 
     @Test
     public void getSession() {
-        Session session = HibernateUtil.getInstance().getSession();
+        Session session = HibernateUtil.getInstance().getTestSession();
         assertNotNull(session);
 
-        assertEquals(session, HibernateUtil.getInstance().getSession());
+        assertEquals(session, HibernateUtil.getInstance().getTestSession());
     }
 }
