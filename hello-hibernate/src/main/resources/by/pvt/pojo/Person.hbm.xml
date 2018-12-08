@@ -35,5 +35,13 @@
             <property name="salary"/>
             <property name="position"/>
         </subclass>
+
+        <subclass name="Employer">
+            <join table="employer">
+                <key column="id"/>
+                <property name="companyTitle"/>
+                <property name="corporatePhoneNumber"/>
+            </join>
+        </subclass>
     </class>
 </hibernate-mapping>
