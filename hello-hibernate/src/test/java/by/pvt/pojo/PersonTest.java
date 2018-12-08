@@ -1,5 +1,6 @@
 package by.pvt.pojo;
 
+import by.pvt.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -20,7 +21,16 @@ public class PersonTest {
 
     Person person1 = new Person();
     Person person2 = new Person();
-    SessionFactory sessionFactory;
+    //SessionFactory sessionFactory;
+    Session session;
+
+    @Before
+    public void setUp() throws Exception {
+        session = HibernateUtil.getInstance().getTestSession();
+        initPerson(person1);
+        initPerson(person2);
+        //setUpHibernate();
+    }
 
     private void initPerson(Person person) {
         person.setAge(35);
@@ -28,29 +38,19 @@ public class PersonTest {
         person.setId("101");
         person.setName("Natalia");
         person.setSecondName("Ivanova");
+        person.setTitles(List.of("mrs", "frau", "sdf"));
     }
 
-    private void setUpHibernate() {
-        StandardServiceRegistry standardServiceRegistry =
-                new StandardServiceRegistryBuilder()
-                        .configure()
-                        .build();
-        sessionFactory =
-                new MetadataSources(standardServiceRegistry)
-                        .buildMetadata()
-                        .buildSessionFactory();
-    }
-
-    @Before
-    public void setUp() throws Exception {
-        initPerson(person1);
-        initPerson(person2);
-        setUpHibernate();
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
+//    private void setUpHibernate() {
+//        StandardServiceRegistry standardServiceRegistry =
+//                new StandardServiceRegistryBuilder()
+//                        .configure()
+//                        .build();
+//        sessionFactory =
+//                new MetadataSources(standardServiceRegistry)
+//                        .buildMetadata()
+//                        .buildSessionFactory();
+//    }
 
     @Test
     public void testHashCode() {
@@ -74,30 +74,44 @@ public class PersonTest {
 
     @Test
     public void testHibernate() {
-        Transaction tx = null;
-        try (Session sess = sessionFactory.openSession()) {
-            tx = sess.beginTransaction();
-            Serializable id1 = sess.save(person1);
-            Serializable id2 = sess.save(person2);
+        try {
+            session.beginTransaction();
+            Serializable id1 = session.save(person1);
+            Serializable id2 = session.save(person2);
+
             System.out.println("my pojo id1: " + id1);
             System.out.println("my pojo id2: " + id2);
+
             assertNotNull(id1);
             assertNotNull(id2);
 
-            tx.commit();
+            session.getTransaction().commit();
         } catch (Exception e) {
-            if (tx != null) tx.rollback();
+            session.getTransaction().rollback();
             e.printStackTrace();
         }
-        Session session2 = sessionFactory.openSession();
-        session2.beginTransaction();
-        List<Person> list = session2.createQuery("from Person").list();
-        assertTrue(list.size() > 0);
-        for (Person p : list) {
-            System.out.println("Person: " + p);
-            assertNotNull(p);
+        Session session2 = HibernateUtil.getInstance().getTestSession();
+        try {
+            session2.beginTransaction();
+            List<Person> list = session2.createQuery("from Person").list();
+            assertTrue(list.size() > 0);
+            for (Person p : list) {
+                System.out.println("Person: " + p);
+                assertNotNull(p);
+            }
+            session2.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session2.getTransaction().rollback();
         }
-        session2.getTransaction().commit();
-        session2.close();
+
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        if (session != null && session.isOpen()) {
+            session.close();
+            session = null;
+        }
     }
 }

@@ -6,15 +6,34 @@
         <id name="id">
             <generator class="uuid"/>
         </id>
+        <discriminator column="type"/>
         <property name="age"/>
         <property name="dateOfBirth" type="timestamp"/>
         <property name="name"/>
         <property name="secondName"/>
+
+        <list name="titles">
+            <key column="id"/>
+            <list-index column="ordnum"/>
+            <element column="title" type="string"/>
+        </list>
+
         <component name="address" class="Address">
             <property name="city"/>
             <property name="street"/>
             <property name="houseNumber"/>
             <property name="appartmentNumber"/>
         </component>
+
+        <subclass name="Student">
+            <property name="university"/>
+            <property name="faculty"/>
+            <property name="courseYear"/>
+        </subclass>
+        <subclass name="Worker">
+            <property name="companyName"/>
+            <property name="salary"/>
+            <property name="position"/>
+        </subclass>
     </class>
 </hibernate-mapping>

@@ -5,7 +5,7 @@
 <hibernate-configuration>
     <session-factory>
         <!--For JDBC connection-->
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hello?createDatabaseIfNotExist=true&amp;useSSL=false</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hello_test?createDatabaseIfNotExist=true&amp;useSSL=false</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">root</property>
