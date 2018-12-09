@@ -2,14 +2,7 @@ package by.pvt.pojo;
 
 import by.pvt.util.HibernateUtil;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 import java.io.Serializable;
 import java.util.GregorianCalendar;
@@ -21,8 +14,7 @@ public class PersonTest {
 
     Person person1 = new Person();
     Person person2 = new Person();
-    //SessionFactory sessionFactory;
-    Session session;
+    private Session session;
 
     @Before
     public void setUp() throws Exception {
@@ -38,19 +30,8 @@ public class PersonTest {
         person.setId("101");
         person.setName("Natalia");
         person.setSecondName("Ivanova");
-        person.setTitles(List.of("mrs", "frau", "sdf"));
+        person.setTitles(List.of("Mrs", "Frau", "Dr."));
     }
-
-//    private void setUpHibernate() {
-//        StandardServiceRegistry standardServiceRegistry =
-//                new StandardServiceRegistryBuilder()
-//                        .configure()
-//                        .build();
-//        sessionFactory =
-//                new MetadataSources(standardServiceRegistry)
-//                        .buildMetadata()
-//                        .buildSessionFactory();
-//    }
 
     @Test
     public void testHashCode() {
@@ -78,13 +59,10 @@ public class PersonTest {
             session.beginTransaction();
             Serializable id1 = session.save(person1);
             Serializable id2 = session.save(person2);
-
             System.out.println("my pojo id1: " + id1);
             System.out.println("my pojo id2: " + id2);
-
             assertNotNull(id1);
             assertNotNull(id2);
-
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
@@ -104,7 +82,6 @@ public class PersonTest {
             e.printStackTrace();
             session2.getTransaction().rollback();
         }
-
     }
 
     @After

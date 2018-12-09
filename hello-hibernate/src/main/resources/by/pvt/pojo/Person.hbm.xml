@@ -35,7 +35,6 @@
             <property name="salary"/>
             <property name="position"/>
         </subclass>
-
         <subclass name="Employer">
             <join table="employer">
                 <key column="id"/>

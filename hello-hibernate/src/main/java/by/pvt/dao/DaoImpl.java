@@ -2,7 +2,6 @@ package by.pvt.dao;
 
 import by.pvt.pojo.Person;
 import by.pvt.util.HibernateUtil;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.jetbrains.annotations.NotNull;
@@ -24,8 +23,8 @@ public class DaoImpl<T> {
         return persistentClass;
     }
 
-    private Session getSession(){
-        if (isTestInstance){
+    private Session getSession() {
+        if (isTestInstance) {
             return HibernateUtil.getInstance().getTestSession();
         } else {
             return HibernateUtil.getInstance().getSession();

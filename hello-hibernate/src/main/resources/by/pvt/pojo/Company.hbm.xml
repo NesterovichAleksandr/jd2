@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE hibernate-mapping PUBLIC ""
-        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="by.pvt.pojo">
     <class name="Company">
         <id name="id">
@@ -26,10 +26,10 @@
             <property name="branchName"/>
             <property name="branchDirector"/>
         </joined-subclass>
-        <joined-subclass name="HesdQuarter">
+        <joined-subclass name="HeadQuarter">
             <key column="id"/>
-            <property name="derectorName"/>
-            <property name="backAccount"/>
+            <property name="directorName"/>
+            <property name="bankAccount"/>
         </joined-subclass>
     </class>
 </hibernate-mapping>

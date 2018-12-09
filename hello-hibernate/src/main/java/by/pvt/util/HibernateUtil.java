@@ -11,7 +11,6 @@ public class HibernateUtil {
     private SessionFactory sessionFactory;
     private SessionFactory testSessionFactory;
 
-
     private static HibernateUtil hibernateUtil;
 
     private HibernateUtil() {
@@ -28,6 +27,10 @@ public class HibernateUtil {
             hibernateUtil = new HibernateUtil();
         }
         return hibernateUtil;
+    }
+
+    public Session getSession(String databaseName) {
+        return getSession();
     }
 
     public Session getSession() {

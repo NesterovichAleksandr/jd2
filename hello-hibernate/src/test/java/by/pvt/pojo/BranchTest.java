@@ -2,9 +2,7 @@ package by.pvt.pojo;
 
 import by.pvt.util.HibernateUtil;
 import org.hibernate.Session;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 import static org.junit.Assert.*;
 
@@ -20,11 +18,10 @@ public class BranchTest {
     @Test
     public void createInstance() {
         Branch branch = new Branch();
-
         branch.setBranchDirector("Branch Director");
         branch.setBranchName("Branch Name");
-        branch.setCompanyName("ooo vasilek");
-        branch.setLegalAddress(new Address("sfdsf", "sfgsagagsg", "dfgs", 3));
+        branch.setCompanyName("OOO Vasilek");
+        branch.setLegalAddress(new Address("minsk", "Lenina", "21", 1));
 
         try {
             session.beginTransaction();

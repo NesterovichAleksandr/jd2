@@ -2,9 +2,7 @@ package by.pvt.pojo;
 
 import by.pvt.util.HibernateUtil;
 import org.hibernate.Session;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 import java.math.BigDecimal;
 
@@ -20,12 +18,12 @@ public class WorkerTest {
     }
 
     @Test
-    public void createInstance(){
+    public void createInstance() {
         Worker worker = new Worker();
         worker.setName("Worker");
         worker.setSecondName("Worker2");
-        worker.setCompanyName(" ooo rom");
-        worker.setSalary(BigDecimal.valueOf(1200.0));
+        worker.setCompanyName("OOO Romashka");
+        worker.setSalary(BigDecimal.valueOf(1200.00));
 
         try {
             session.beginTransaction();
@@ -45,8 +43,4 @@ public class WorkerTest {
             session = null;
         }
     }
-
-
-
-
 }

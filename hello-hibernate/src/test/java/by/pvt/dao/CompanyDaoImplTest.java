@@ -15,7 +15,7 @@ public class CompanyDaoImplTest {
     @Before
     public void setUp() {
         companyDao = new DaoImpl<>(Company.class);
-        companyDao.isTestInstance = true;
+        DaoImpl.isTestInstance = true;
 
     }
 
@@ -57,7 +57,7 @@ public class CompanyDaoImplTest {
 
     @After
     public void tearDown() {
-        companyDao.isTestInstance = false;
+        DaoImpl.isTestInstance = false;
         companyDao = null;
     }
 }

@@ -2,13 +2,11 @@ package by.pvt.pojo;
 
 import by.pvt.util.HibernateUtil;
 import org.hibernate.Session;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 import static org.junit.Assert.*;
 
-public class HesdQuarterTest {
+public class HeadQuarterTest {
 
     private Session session;
 
@@ -18,23 +16,23 @@ public class HesdQuarterTest {
     }
 
     @Test
-    public void createInctance(){
-        HesdQuarter hesdQuarter = new HesdQuarter();
+    public void createInstance(){
+        HeadQuarter headQuarter = new HeadQuarter();
 
-        hesdQuarter.setCompanyName(" oo sfsf");
-        hesdQuarter.setBackAccount("sgfsgf");
+        headQuarter.setCompanyName("OOO Vasilek");
+        headQuarter.setSiteUrl("www.vasilek.by");
+        headQuarter.setBankAccount("hgkd55w5b3563vt34");
+        headQuarter.setDirectorName("Director");
 
         try {
             session.beginTransaction();
-            session.saveOrUpdate(hesdQuarter);
+            session.saveOrUpdate(headQuarter);
             session.getTransaction().commit();
-            assertNotNull(hesdQuarter.getId());
+            assertNotNull(headQuarter.getId());
         } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();
         }
-
-
     }
 
     @After

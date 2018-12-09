@@ -2,9 +2,7 @@ package by.pvt.pojo;
 
 import by.pvt.util.HibernateUtil;
 import org.hibernate.Session;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 import static org.junit.Assert.*;
 
@@ -21,8 +19,8 @@ public class EmployerTest {
     public void createInstance() {
         Employer employer = new Employer();
 
-        employer.setName("IVAN");
-        employer.setCorporatePhoneNumber("7657676474746546854");
+        employer.setName("Ivan");
+        employer.setCorporatePhoneNumber("375291234567");
 
         try {
             session.beginTransaction();
@@ -34,7 +32,6 @@ public class EmployerTest {
             session.getTransaction().rollback();
         }
     }
-
 
     @After
     public void tearDown() throws Exception {

@@ -2,11 +2,7 @@ package by.pvt.pojo;
 
 import by.pvt.util.HibernateUtil;
 import org.hibernate.Session;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
-import java.math.BigDecimal;
+import org.junit.*;
 
 import static org.junit.Assert.*;
 
