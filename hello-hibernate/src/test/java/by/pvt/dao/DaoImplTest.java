@@ -22,12 +22,6 @@ public class DaoImplTest {
         DaoImpl.isTestInstance = true;
     }
 
-    @After
-    public void tearDown() {
-        DaoImpl.isTestInstance = false;
-        dao = null;
-    }
-
     @Test
     public void saveOrUpdate() {
         assertNull(dao.saveOrUpdate(null));
@@ -147,5 +141,11 @@ public class DaoImplTest {
         assertEquals("Lenina", person.getAddress().getStreet());
         assertEquals("10", person.getAddress().getHouseNumber());
         System.out.println(person);
+    }
+
+    @After
+    public void tearDown() {
+        DaoImpl.isTestInstance = false;
+        dao = null;
     }
 }

@@ -3,9 +3,11 @@ package by.pvt.dao;
 import by.pvt.pojo.Address;
 import by.pvt.pojo.Company;
 import org.junit.*;
+import org.junit.runners.*;
 
 import static org.junit.Assert.*;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CompanyDaoImplTest {
 
     private DaoImpl<Company> companyDao;
@@ -15,12 +17,6 @@ public class CompanyDaoImplTest {
         companyDao = new DaoImpl<>(Company.class);
         companyDao.isTestInstance = true;
 
-    }
-
-    @After
-    public void tearDown() {
-        companyDao.isTestInstance = false;
-        companyDao = null;
     }
 
     @Test
@@ -41,7 +37,7 @@ public class CompanyDaoImplTest {
         assertEquals(company, company1);
         assertEquals(company.getLegalAddress(), company1.getLegalAddress());
 
-        System.out.println(company1.getId());
+        System.out.println("Company ID: " + company1.getId());
     }
 
     @Test
@@ -51,5 +47,17 @@ public class CompanyDaoImplTest {
         companyDao.saveOrUpdate(company);
 
         assertEquals("Vitebsk", company.getHomeAddress().getCity());
+    }
+
+    @Test
+    public void delete() {
+        companyDao.delete(companyDao.load(1L).getId());
+        assertNull(companyDao.find(1L));
+    }
+
+    @After
+    public void tearDown() {
+        companyDao.isTestInstance = false;
+        companyDao = null;
     }
 }
