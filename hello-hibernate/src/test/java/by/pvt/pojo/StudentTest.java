@@ -1,14 +1,18 @@
 package by.pvt.pojo;
 
+import by.pvt.dao.DaoImpl;
 import by.pvt.util.HibernateUtil;
 import org.hibernate.Session;
 import org.junit.*;
+
+import java.io.Serializable;
 
 import static org.junit.Assert.*;
 
 public class StudentTest {
 
     private Session session;
+    private DaoImpl<Student> studentDao;
 
     @Before
     public void setUp() throws Exception {
@@ -33,6 +37,32 @@ public class StudentTest {
             e.printStackTrace();
             session.getTransaction().rollback();
         }
+    }
+
+    @Test
+    public void updateStudent() {
+        Student student = new Student();
+        student.setName("Alex");
+        student.setSecondName("Jobs");
+        student.setUniversity("BNTU");
+        student.setFaculty("SF");
+
+        try {
+            session.beginTransaction();
+            session.saveOrUpdate(student);
+            session.getTransaction().commit();
+            assertNotNull(student.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+
+        student.setFaculty("ATF");
+        session.saveOrUpdate(student);
+
+
+
+
     }
 
     @After
