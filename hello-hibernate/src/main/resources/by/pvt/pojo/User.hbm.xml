@@ -9,6 +9,6 @@
         </id>
         <property name="userEmail"/>
         <property name="userName"/>
-        <one-to-one name="userDetails" class="UserDetails"/>
+        <one-to-one name="userDetails" class="UserDetails" cascade="all"/>
     </class>
 </hibernate-mapping>
