@@ -39,11 +39,36 @@ public class UserDaoImplTest {
     }
 
     @Test
-    public void step2_findUser(){
+    public void step2_findUser() {
         User user = userDao.find(1L);
         assertNotNull(user);
         assertNotNull(user.getUserDetails());
+    }
 
+    @Test
+    public void step3_updateUser() {
+        User user = userDao.load(1L);
+        assertTrue(user.getUserName().equals("User"));
+        assertTrue("password".equals(user.getUserDetails().getPassword()));
+
+        user.setUserName("New User");
+        user.getUserDetails().setPassword("New password");
+        userDao.saveOrUpdate(user);
+
+        User user1 = userDao.load(1L);
+        assertEquals(user1.getUserName(), "New User");
+        assertEquals(user1.getUserDetails().getPassword(),"New password");
+
+    }
+
+    @Test
+    public void step4_deleteUser(){
+        User user = userDao.load(1L);
+
+        userDao.delete(user.getId());
+
+        User user1 = userDao.find(1L);
+        assertNull(user1);
     }
 
     @After
