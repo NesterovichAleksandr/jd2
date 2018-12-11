@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC ""
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="by.pvt.pojo">
+    <class name="UserDetails">
+        <id name="id">
+            <generator class="foreign">
+                <param name="property">user</param>
+            </generator>
+        </id>
+        <property name="expiredDate"/>
+        <property name="password"/>
+        <property name="loginAttempts"/>
+        <one-to-one name="user" class="User" constrained="true"/>
+    </class>
+</hibernate-mapping>
