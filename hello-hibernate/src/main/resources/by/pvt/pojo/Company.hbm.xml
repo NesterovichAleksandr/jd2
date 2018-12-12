@@ -18,7 +18,7 @@
             <property name="city"/>
             <property name="street"/>
             <property name="houseNumber"/>
-            <property name="appartmentNumber"/>
+            <property name="apartmentNumber"/>
         </component>
 
         <joined-subclass name="Branch">

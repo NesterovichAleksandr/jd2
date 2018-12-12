@@ -10,17 +10,17 @@ public class Address {
     private String street;
     private Integer zip;
     private String houseNumber;
-    private int appartmentNumber;
+    private int apartmentNumber;
     private String officeNumber;
 
     public Address() {
     }
 
-    public Address(String city, String street, String houseNumber, int appartmentNumber) {
+    public Address(String city, String street, String houseNumber, int apartmentNumber) {
         this.city = city;
         this.street = street;
         this.houseNumber = houseNumber;
-        this.appartmentNumber = appartmentNumber;
+        this.apartmentNumber = apartmentNumber;
     }
 
     public long getId() {
@@ -71,12 +71,12 @@ public class Address {
         this.houseNumber = houseNumber;
     }
 
-    public int getAppartmentNumber() {
-        return appartmentNumber;
+    public int getApartmentNumber() {
+        return apartmentNumber;
     }
 
-    public void setAppartmentNumber(int appartmentNumber) {
-        this.appartmentNumber = appartmentNumber;
+    public void setApartmentNumber(int appartmentNumber) {
+        this.apartmentNumber = appartmentNumber;
     }
 
     public String getOfficeNumber() {
@@ -96,7 +96,7 @@ public class Address {
                 .append("street", street)
                 .append("zip", zip)
                 .append("houseNumber", houseNumber)
-                .append("appartmentNumber", appartmentNumber)
+                .append("appartmentNumber", apartmentNumber)
                 .append("officeNumber", officeNumber)
                 .toString();
     }
