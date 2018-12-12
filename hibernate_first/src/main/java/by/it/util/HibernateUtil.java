@@ -43,4 +43,13 @@ public class HibernateUtil {
         }
         return session;
     }
+
+    public void close() {
+        Session session = threadLocal.get();
+        if (session != null || session.isOpen()) {
+            session.close();
+            session = null;
+        }
+        sessionFactory.close();
+    }
 }

@@ -2,6 +2,7 @@ package by.it.loader;
 
 import by.it.dao.DaoImpl;
 import by.it.pojos.Person;
+import by.it.util.HibernateUtil;
 
 public class PersonLoader {
 
@@ -15,5 +16,7 @@ public class PersonLoader {
         System.out.println(dao.read(1));
 
         System.out.println("end");
+
+        HibernateUtil.getInstance().close();
     }
 }
