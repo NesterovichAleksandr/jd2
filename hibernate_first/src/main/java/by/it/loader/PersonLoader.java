@@ -10,12 +10,13 @@ public class PersonLoader {
         Person person = new Person(null, 21, "Ivan", "Ivanov");
         System.out.println(person);
 
-        DaoImpl dao = new DaoImpl();
+        //DaoImpl dao = new DaoImpl();
 
-        dao.create(person);
-        System.out.println(dao.read(1));
+        //dao.create(person);
+        //Person person1 = dao.read(1);
+        //System.out.println(person1);
 
-        System.out.println("end");
+
 
         HibernateUtil.getInstance().close();
     }

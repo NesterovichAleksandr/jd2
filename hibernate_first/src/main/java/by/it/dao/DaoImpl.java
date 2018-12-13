@@ -1,30 +1,59 @@
 package by.it.dao;
 
-import by.it.pojos.Person;
 import by.it.util.HibernateUtil;
 import org.hibernate.Session;
 
-public class DaoImpl {
+public class DaoImpl<T> {
 
-    public void create(Person person) {
-        Session session = HibernateUtil.getInstance().getSession();
-        session.beginTransaction();
-        session.save(person);
-        session.getTransaction().commit();
+    private Class<T> persistentClass;
+
+    public DaoImpl(Class<T> type) {
+        this.persistentClass = type;
     }
 
-    public Person read(Integer id) {
-        Session session = HibernateUtil.getInstance().getSession();
-        session.beginTransaction();
-        Person person = session.load(Person.class, id);
-        session.getTransaction().commit();
-        return person;
+    public Class<T> getPersistentClass() {
+        return persistentClass;
     }
 
-    public void delete(Person person) {
+    public T create(T t) {
         Session session = HibernateUtil.getInstance().getSession();
-        session.beginTransaction();
-        session.delete(person);
-        session.getTransaction().commit();
+        try {
+            session.beginTransaction();
+            session.save(t);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            session.close();
+        }
+        return t;
+    }
+
+    public T read(Integer id) {
+        Session session = HibernateUtil.getInstance().getSession();
+        T t = null;
+        try {
+            session.beginTransaction();
+            t = session.get(getPersistentClass(), id);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            session.close();
+        }
+        return t;
+    }
+
+    public void delete(T t) {
+        Session session = HibernateUtil.getInstance().getSession();
+        try {
+            session.beginTransaction();
+            session.delete(t);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            session.close();
+        }
     }
 }
