@@ -20,5 +20,9 @@ public class Main {
 
         System.out.println(averageService.getMean(inputData));
 
+        System.out.println(Arrays.toString(averageService.getMode(inputData)));
+
+        System.out.println(averageService.getMedian(inputData));
+
     }
 }
