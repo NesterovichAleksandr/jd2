@@ -9,7 +9,7 @@
         <property name="cellPhone"/>
         <property name="firstName"/>
         <property name="lastName"/>
-        <many-to-one name="department" class="Department" cascade="save-update" not-null="true"/>
+        <many-to-one name="department" class="Department" cascade="save-update"/>
         <one-to-one name="employeeDetails" class="EmployeeDetails" cascade="all"/>
     </class>
 </hibernate-mapping>

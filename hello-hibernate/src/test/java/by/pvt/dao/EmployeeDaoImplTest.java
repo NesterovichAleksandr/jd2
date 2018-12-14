@@ -1,24 +1,33 @@
-package by.pvt.pojo;
+package by.pvt.dao;
 
-import by.pvt.util.HibernateUtil;
-import org.hibernate.Session;
-import org.junit.*;
+import by.pvt.pojo.Address;
+import by.pvt.pojo.Department;
+import by.pvt.pojo.Employee;
+import by.pvt.pojo.EmployeeDetails;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import java.util.Set;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
-public class EmployeeTest {
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class EmployeeDaoImplTest {
 
-    private Session session;
+    private DaoImpl<Employee> employeeDao;
 
     @Before
-    public void setUp() throws Exception {
-        session = HibernateUtil.getInstance().getTestSession();
+    public void setUp() {
+        employeeDao = new DaoImpl<>(Employee.class);
+        DaoImpl.isTestInstance = true;
     }
 
     @Test
-    public void createInstance() {
+    public void step1_createNewEmployee() {
+
         Employee employee1 = new Employee();
         employee1.setFirstName("Name1");
         employee1.setLastName("LastName1");
@@ -72,27 +81,18 @@ public class EmployeeTest {
         employeeDetails3.setEmployee(employee3);
         employee3.setEmployeeDetails(employeeDetails3);
 
-        try {
-            session.beginTransaction();
-            session.saveOrUpdate(employee1);
-            session.saveOrUpdate(employee2);
-            session.saveOrUpdate(employee3);
-            session.getTransaction().commit();
-            assertTrue(employee1.getId() > 0);
-            assertTrue(employee2.getId() > 0);
-            assertTrue(employee3.getId() > 0);
-        } catch (Exception e) {
-            e.printStackTrace();
-            session.getTransaction().rollback();
-            session.close();
-        }
+        employeeDao.saveOrUpdate(employee1);
+        employeeDao.saveOrUpdate(employee2);
+        employeeDao.saveOrUpdate(employee3);
+
+        assertEquals(1, employee1.getId());
+        assertEquals(2, employee2.getId());
+        assertEquals(3, employee3.getId());
     }
 
     @After
-    public void tearDown() throws Exception {
-        if (session != null && session.isOpen()) {
-            session.close();
-            session = null;
-        }
+    public void tearDown() {
+        DaoImpl.isTestInstance = false;
+        employeeDao = null;
     }
 }

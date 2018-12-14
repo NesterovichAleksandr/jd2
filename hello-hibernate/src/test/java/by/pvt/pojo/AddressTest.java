@@ -25,7 +25,7 @@ public class AddressTest {
         Session session = HibernateUtil.getInstance().getTestSession();
         session.saveOrUpdate(address);
 
-        assertEquals(1L, address.getId());
+        assertEquals(4L, address.getId());
         session.delete(address);
     }
 
