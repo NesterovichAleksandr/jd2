@@ -13,11 +13,13 @@ import org.junit.runners.MethodSorters;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EmployeeDaoImplTest {
 
     private DaoImpl<Employee> employeeDao;
+    private DaoImpl<Department> departmentDao;
 
     @Before
     public void setUp() {
@@ -88,6 +90,38 @@ public class EmployeeDaoImplTest {
         assertEquals(1, employee1.getId());
         assertEquals(2, employee2.getId());
         assertEquals(3, employee3.getId());
+    }
+
+    @Test
+    public void step2_findEmployee() {
+        Employee employee = employeeDao.find(1L);
+        assertNotNull(employee);
+    }
+
+    @Test
+    public void step3_updateEmployee() {
+        Employee employee1 = employeeDao.load(1L);
+        Employee employee2 = employeeDao.load(2L);
+        Employee employee3 = employeeDao.load(3L);
+
+        Department department1 = employee1.getDepartment();
+        Department department2 = employee3.getDepartment();
+
+        employee1.setDepartment(department2);
+        employee2.setDepartment(department2);
+        employee3.setDepartment(department1);
+
+        employeeDao.saveOrUpdate(employee1);
+        employeeDao.saveOrUpdate(employee2);
+        employeeDao.saveOrUpdate(employee3);
+
+        Employee employee4 = employeeDao.load(1L);
+        Employee employee5 = employeeDao.load(2L);
+        Employee employee6 = employeeDao.load(3L);
+
+        assertEquals(employee4.getDepartment(), department2);
+        assertEquals(employee5.getDepartment(), department2);
+        assertEquals(employee6.getDepartment(), department1);
     }
 
     @After
