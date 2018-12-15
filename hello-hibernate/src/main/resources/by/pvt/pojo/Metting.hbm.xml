@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC ""
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="by.pvt.pojo">
+    <class name="Meeting">
+        <id name="id">
+            <generator class="increment"/>
+        </id>
+        <property name="dateTime" type="timestamp"/>
+        <property name="status"/>
+        <property name="subject"/>
+        <many-to-one name="organiser" class="Employee" unique="true" not-null="true"/>
+        <set name="attendees" table="employee_meeting">
+            <key column="meeting"/>
+            <many-to-many class="Employee" column="employee"/>
+        </set>
+    </class>
+</hibernate-mapping>
