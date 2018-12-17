@@ -42,7 +42,7 @@ public class CompanyDaoImplTest {
 
     @Test
     public void updateAddress() {
-        Company company = companyDao.load(1L);
+        Company company = companyDao.load(2L);
         company.getHomeAddress().setCity("Vitebsk");
         companyDao.saveOrUpdate(company);
 
@@ -51,8 +51,8 @@ public class CompanyDaoImplTest {
 
     @Test
     public void delete() {
-        companyDao.delete(companyDao.load(1L).getId());
-        assertNull(companyDao.find(1L));
+        companyDao.delete(companyDao.load(2L).getId());
+        assertNull(companyDao.find(2L));
     }
 
     @After
