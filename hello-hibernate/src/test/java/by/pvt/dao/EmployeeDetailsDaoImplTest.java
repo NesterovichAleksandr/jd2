@@ -31,7 +31,7 @@ public class EmployeeDetailsDaoImplTest {
 
     @Test
     public void step2_findEmployeeDetails() {
-        assertNotNull(employeeDetailsDao.find(1L));
+        assertNotNull(employeeDetailsDao.find(4L));
     }
 
     @Test
