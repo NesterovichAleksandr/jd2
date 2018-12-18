@@ -14,6 +14,7 @@ import java.util.Set;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MeetingDaoImplTest {
@@ -51,19 +52,24 @@ public class MeetingDaoImplTest {
         Meeting meeting1 = createMeeting("1");
         meeting1.setAttendees(Set.of(employee1, employee2));
         meeting1.setOrganiser(employee1);
+        meetingDao.saveOrUpdate(meeting1);
+        assertTrue(meeting1.getId() == 1L);
 
         meetingDao.saveOrUpdate(meeting1);
 
         Meeting meeting2 = createMeeting("2");
         meeting2.setOrganiser(employee4);
         meeting2.setAttendees(Set.of(employee1, employee2, employee3, employee4));
-        meeting2.setOrganiser(employee1);
+        meetingDao.saveOrUpdate(meeting2);
+        assertTrue(meeting2.getId() == 2L);
     }
 
     @Test
     public void step3_deleteMeeting() {
         meetingDao.delete(1L);
         assertNull(meetingDao.find(1L));
+        meetingDao.delete(2L);
+        assertNull(meetingDao.find(2L));
     }
 
     private Meeting createMeeting(String postfix) {

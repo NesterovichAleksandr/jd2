@@ -9,8 +9,8 @@
         <property name="cellPhone"/>
         <property name="firstName"/>
         <property name="lastName"/>
-        <many-to-one name="department" class="Department" cascade="save-update"/>
-        <one-to-one name="employeeDetails" class="EmployeeDetails" cascade="all"/>
+        <many-to-one name="department" class="Department" cascade="save-update" not-null="false" lazy="no-proxy"/>
+        <one-to-one name="employeeDetails" class="EmployeeDetails" cascade="all-delete-orphan" lazy="no-proxy"/>
         <set name="meetings" table="employee_meeting">
             <key column="employee"/>
             <many-to-many class="Meeting" column="meeting"/>

@@ -10,7 +10,7 @@
         <property name="privateNr"/>
         <many-to-one name="address" class="Address"
                      unique="true" not-null="true" cascade="save-update"/>
-        <one-to-one name="employee" class="Employee"
-                    foreign-key="employee_id" cascade="all"/>
+        <one-to-one name="employee" class="Employee" fetch="join"
+                    foreign-key="employee_id" cascade="save-update" lazy="no-proxy"/>
     </class>
 </hibernate-mapping>

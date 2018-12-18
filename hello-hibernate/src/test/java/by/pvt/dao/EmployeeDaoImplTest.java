@@ -4,22 +4,19 @@ import by.pvt.pojo.Address;
 import by.pvt.pojo.Department;
 import by.pvt.pojo.Employee;
 import by.pvt.pojo.EmployeeDetails;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runners.MethodSorters;
 
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EmployeeDaoImplTest {
 
     private DaoImpl<Employee> employeeDao;
-    private DaoImpl<Department> departmentDao;
 
     @Before
     public void setUp() {
@@ -31,17 +28,17 @@ public class EmployeeDaoImplTest {
     public void step1_createNewEmployee() {
 
         Employee employee1 = new Employee();
-        employee1.setFirstName("Name1");
+        employee1.setFirstName("Name12");
         employee1.setLastName("LastName1");
         employee1.setCellPhone("11111");
 
         Employee employee2 = new Employee();
-        employee2.setFirstName("Name2");
+        employee2.setFirstName("Name22");
         employee2.setLastName("LastName2");
         employee2.setCellPhone("22222");
 
         Employee employee3 = new Employee();
-        employee3.setFirstName("Name3");
+        employee3.setFirstName("Name32");
         employee3.setLastName("LastName3");
         employee3.setCellPhone("33333");
 
@@ -122,6 +119,24 @@ public class EmployeeDaoImplTest {
         assertEquals(employee4.getDepartment(), department2);
         assertEquals(employee5.getDepartment(), department2);
         assertEquals(employee6.getDepartment(), department1);
+    }
+
+    @Ignore
+    public void step4_deleteEmployees() {
+        Employee employee = employeeDao.load(1L);
+        Employee employee2 = employeeDao.load(2L);
+        employee.getDepartment().setEmployees(null);
+
+        employeeDao.delete(1L);
+        assertNull(employeeDao.find(1L));
+
+        employeeDao.delete(2L);
+        assertNull(employeeDao.find(2L));
+
+        Employee employee3 = employeeDao.load(3L);
+        employee3.getDepartment().setEmployees(null);
+        employeeDao.delete(3L);
+        assertNull(employeeDao.find(3L));
     }
 
     @After
