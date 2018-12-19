@@ -1,16 +1,15 @@
 package by.pvt.pojo;
 
 import by.pvt.util.HibernateUtil;
+import by.pvt.util.TestData;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.junit.*;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Random;
 
 import static org.junit.Assert.*;
 
@@ -25,7 +24,7 @@ public class WorkerTest {
 
     @Test
     public void createInstance() {
-        Worker worker = createWorker("0");
+        Worker worker = createWorker("");
 
         try {
             session.beginTransaction();
@@ -40,9 +39,13 @@ public class WorkerTest {
 
     @Test
     public void testCriteria() {
+        @TestData
         Worker worker1 = createWorker("1");
+        @TestData
         Worker worker2 = createWorker("2");
+        @TestData
         Worker worker3 = createWorker("3");
+        @TestData
         Worker worker4 = createWorker("4");
 
         try {
@@ -60,7 +63,6 @@ public class WorkerTest {
             e.printStackTrace();
             session.getTransaction().rollback();
         }
-        //session = HibernateUtil.getInstance().getTestSession();
 
         Criteria criteria = session.createCriteria(Worker.class);
         criteria.add(Restrictions.ge("salary", new BigDecimal(1000.00)));
@@ -75,8 +77,10 @@ public class WorkerTest {
     private Worker createWorker(String suffix) {
         if (suffix == null) suffix = "";
         Worker worker = new Worker();
-        worker.setSalary(BigDecimal.valueOf(500 + Math.random() * 1000.00));
         worker.setName("Worker name" + suffix);
+        worker.setSecondName("Worker second name" + suffix);
+        worker.setCompanyName("OOO Romashka");
+        worker.setSalary(BigDecimal.valueOf(500 + Math.random() * 1000.00));
         return worker;
     }
 

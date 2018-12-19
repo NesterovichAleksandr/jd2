@@ -15,7 +15,7 @@
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
         <mapping resource="by/pvt/pojo/Person.hbm.xml"/>
-        <mapping resource="by/pvt/pojo/Address.hbm.xml"/>
+        <!--<mapping resource="by/pvt/pojo/Address.hbm.xml"/>-->
         <mapping resource="by/pvt/pojo/Company.hbm.xml"/>
         <mapping resource="by/pvt/pojo/User.hbm.xml"/>
         <mapping resource="by/pvt/pojo/UserDetails.hbm.xml"/>
@@ -23,6 +23,7 @@
         <mapping resource="by/pvt/pojo/Employee.hbm.xml"/>
         <mapping resource="by/pvt/pojo/EmployeeDatails.hbm.xml"/>
         <mapping resource="by/pvt/pojo/Meeting.hbm.xml"/>
+        <mapping class="by.pvt.pojo.Address"/>
 
 
     </session-factory>

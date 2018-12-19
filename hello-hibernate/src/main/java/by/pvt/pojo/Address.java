@@ -2,15 +2,34 @@ package by.pvt.pojo;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import javax.persistence.*;
+
+@Entity
 public class Address {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column
     private String country;
+
+    @Column
     private String city;
+
+    @Column
     private String street;
+
+    @Column
     private Integer zip;
+
+    @Column
     private String houseNumber;
+
+    @Column
     private int apartmentNumber;
+
+    @Column
     private String officeNumber;
 
     public Address() {
@@ -75,8 +94,8 @@ public class Address {
         return apartmentNumber;
     }
 
-    public void setApartmentNumber(int appartmentNumber) {
-        this.apartmentNumber = appartmentNumber;
+    public void setApartmentNumber(int apartmentNumber) {
+        this.apartmentNumber = apartmentNumber;
     }
 
     public String getOfficeNumber() {
@@ -96,7 +115,7 @@ public class Address {
                 .append("street", street)
                 .append("zip", zip)
                 .append("houseNumber", houseNumber)
-                .append("appartmentNumber", apartmentNumber)
+                .append("apartmentNumber", apartmentNumber)
                 .append("officeNumber", officeNumber)
                 .toString();
     }
