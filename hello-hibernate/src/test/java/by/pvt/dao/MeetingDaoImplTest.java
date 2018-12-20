@@ -62,10 +62,13 @@ public class MeetingDaoImplTest {
         meeting2.setAttendees(Set.of(employee1, employee2, employee3, employee4));
         meetingDao.saveOrUpdate(meeting2);
         assertTrue(meeting2.getId() == 2L);
+
+        System.out.println("meeting1 ID: " + meeting1.getId());
+        System.out.println("meeting2 ID: " + meeting2.getId());
     }
 
     @Test
-    public void step3_deleteMeeting() {
+    public void step2_deleteMeeting() {
         meetingDao.delete(1L);
         assertNull(meetingDao.find(1L));
         meetingDao.delete(2L);

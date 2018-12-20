@@ -27,6 +27,8 @@ public class AddressDaoImplTest {
 
         addressDao.saveOrUpdate(address);
         assertTrue(address.getId() > 0);
+
+        System.out.println("address id: " + address.getId());
     }
 
     @Test

@@ -1,8 +1,15 @@
 package by.pvt.pojo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
 public class HeadQuarter extends Company {
 
+    @Column
     private String directorName;
+
+    @Column
     private String bankAccount;
 
     public String getDirectorName() {

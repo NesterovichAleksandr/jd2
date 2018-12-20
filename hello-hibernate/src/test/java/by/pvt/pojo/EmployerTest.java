@@ -31,6 +31,7 @@ public class EmployerTest {
             e.printStackTrace();
             session.getTransaction().rollback();
         }
+        System.out.println("employer ID: " + employer.getId());
     }
 
     @After

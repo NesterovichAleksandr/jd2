@@ -1,11 +1,20 @@
 package by.pvt.pojo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import java.math.BigDecimal;
 
+@Entity
+//@DiscriminatorValue("w")
 public class Worker extends Person {
 
+    @Column
     private String companyName;
+
+    @Column
     private String position;
+
+    @Column
     private BigDecimal salary;
 
     public String getCompanyName() {

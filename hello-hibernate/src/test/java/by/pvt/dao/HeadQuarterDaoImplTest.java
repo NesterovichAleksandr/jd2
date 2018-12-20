@@ -25,28 +25,30 @@ public class HeadQuarterDaoImplTest {
         headQuarterDao.saveOrUpdate(headQuarter);
 
         assertTrue(headQuarter.getId() > 0);
+
+        System.out.println("headQuarter ID: " + headQuarter.getId());
     }
 
     @Test
     public void step2_findHeadQuarter() {
-        assertNotNull(headQuarterDao.find(3L));
+        assertNotNull(headQuarterDao.find(21L));
     }
 
     @Test
     public void step3_updateHeadQuarter() {
-        HeadQuarter testHeadQuarter = headQuarterDao.load(3L);
+        HeadQuarter testHeadQuarter = headQuarterDao.load(21L);
         assertNotNull(testHeadQuarter);
         testHeadQuarter.setBankAccount("New BankAccountDaoTest");
         headQuarterDao.saveOrUpdate(testHeadQuarter);
 
-        HeadQuarter testUpdateHeadQuarter = headQuarterDao.load(3L);
+        HeadQuarter testUpdateHeadQuarter = headQuarterDao.load(21L);
         assertEquals("New BankAccountDaoTest", testUpdateHeadQuarter.getBankAccount());
     }
 
     @Test
     public void step4_deleteHeadQuarter() {
-        headQuarterDao.delete(3L);
-        assertNull(headQuarterDao.find(3L));
+        headQuarterDao.delete(21L);
+        assertNull(headQuarterDao.find(21L));
     }
 
     @After

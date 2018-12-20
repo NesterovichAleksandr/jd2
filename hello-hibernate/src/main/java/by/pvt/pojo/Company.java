@@ -1,12 +1,28 @@
 package by.pvt.pojo;
 
+import javax.persistence.*;
+
+@Entity
 public class Company {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
+
+    @Column
     private String companyName;
+
+    @Column
     private String siteUrl;
 
+    @JoinColumn
+    //@ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Address homeAddress;
+
+    @JoinColumn
+    //@ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Address legalAddress;
 
     public long getId() {

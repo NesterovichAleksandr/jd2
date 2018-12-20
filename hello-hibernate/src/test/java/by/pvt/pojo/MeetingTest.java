@@ -62,6 +62,7 @@ public class MeetingTest {
             e.printStackTrace();
             session.getTransaction().rollback();
         }
+        System.out.println("meeting1 ID: " + meeting1.getId());
     }
 
     private Meeting createMeeting(String postfix) {

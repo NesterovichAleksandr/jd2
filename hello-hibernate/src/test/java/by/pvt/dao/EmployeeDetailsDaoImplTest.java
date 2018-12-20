@@ -27,29 +27,31 @@ public class EmployeeDetailsDaoImplTest {
         employeeDetailsDao.saveOrUpdate(employeeDetails);
 
         assertTrue(employeeDetails.getId() > 0);
+
+        System.out.println("employeeDetails ID: " + employeeDetails.getId());
     }
 
     @Test
     public void step2_findEmployeeDetails() {
-        assertNotNull(employeeDetailsDao.find(4L));
+        assertNotNull(employeeDetailsDao.find(19L));
     }
 
     @Test
     public void step3_updateEmployeeDetails() {
-        EmployeeDetails employeeDetails = employeeDetailsDao.load(4L);
+        EmployeeDetails employeeDetails = employeeDetailsDao.load(19L);
         assertEquals("PositionDaoTest", employeeDetails.getPosition());
 
         employeeDetails.setPosition("New PositionDaoTest");
         employeeDetailsDao.saveOrUpdate(employeeDetails);
 
-        EmployeeDetails testEmployeeDetails = employeeDetailsDao.load(4L);
+        EmployeeDetails testEmployeeDetails = employeeDetailsDao.load(19L);
         assertEquals("New PositionDaoTest", testEmployeeDetails.getPosition());
     }
 
     @Test
     public void step4_deleteEmployeeDetails() {
-        employeeDetailsDao.delete(4L);
-        assertNull(employeeDetailsDao.find(4L));
+        employeeDetailsDao.delete(19L);
+        assertNull(employeeDetailsDao.find(19L));
     }
 
     @After

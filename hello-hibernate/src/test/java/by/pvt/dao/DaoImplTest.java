@@ -34,6 +34,8 @@ public class DaoImplTest {
         assertEquals(person, person2);
         assertNotNull(person.getId());
 
+        System.out.println("person ID: " + person.getId());
+
         person2.setSecondName("Petrova");
         Person person3 = dao.saveOrUpdate(person2);
         assertEquals("Petrova", person3.getSecondName());
@@ -56,6 +58,8 @@ public class DaoImplTest {
         assertNotNull(loaderPerson);
         assertNotNull(loaderPerson.getId());
         assertEquals(id, loaderPerson.getId());
+
+        System.out.println("person ID: " + id);
     }
 
     @Test
@@ -64,6 +68,8 @@ public class DaoImplTest {
         assertNull(dao.find("testID"));
         Serializable id = dao.saveOrUpdate(new Person()).getId();
         assertNotNull(dao.find(id));
+
+        System.out.println("person ID: " + id);
     }
 
     @Test
@@ -74,6 +80,8 @@ public class DaoImplTest {
         person = dao.saveOrUpdate(person);
         assertNotNull(person.getId());
         assertEquals(person.getName(), "Vasia");
+
+        System.out.println("person ID: " + person.getId());
 
         System.out.println("contains(person): " + HibernateUtil.getInstance().getTestSession().contains(person));
         //person POJO is connected with current session
@@ -89,6 +97,8 @@ public class DaoImplTest {
         person = dao.saveOrUpdate(person);
         assertNotNull(person.getId());
         assertEquals(person.getName(), "Vasia");
+
+        System.out.println("person ID: " + person.getId());
 
         // Throws exception, rollbacks transaction and closes session
         dao.updateName(null, null);

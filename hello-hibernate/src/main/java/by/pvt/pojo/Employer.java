@@ -1,9 +1,16 @@
 package by.pvt.pojo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
+//@DiscriminatorValue("e")
 public class Employer extends Person {
 
+    @Column
     private String companyTitle;
 
+    @Column
     private String corporatePhoneNumber;
 
     public String getCompanyTitle() {

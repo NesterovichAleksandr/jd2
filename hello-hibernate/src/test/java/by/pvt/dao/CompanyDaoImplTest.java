@@ -5,6 +5,8 @@ import by.pvt.pojo.Company;
 import org.junit.*;
 import org.junit.runners.*;
 
+import javax.persistence.Id;
+
 import static org.junit.Assert.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -40,9 +42,9 @@ public class CompanyDaoImplTest {
         System.out.println("Company ID: " + company1.getId());
     }
 
-    @Test
+    @Ignore
     public void updateAddress() {
-        Company company = companyDao.load(2L);
+        Company company = companyDao.load(3L);
         company.getHomeAddress().setCity("Vitebsk");
         companyDao.saveOrUpdate(company);
 
@@ -51,8 +53,8 @@ public class CompanyDaoImplTest {
 
     @Test
     public void delete() {
-        companyDao.delete(companyDao.load(2L).getId());
-        assertNull(companyDao.find(2L));
+        companyDao.delete(companyDao.load(3L).getId());
+        assertNull(companyDao.find(3L));
     }
 
     @After

@@ -1,14 +1,26 @@
 package by.pvt.pojo;
 
+import javax.persistence.*;
 import java.sql.Timestamp;
 
+@Entity
 public class UserDetails {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
+
+    @Column
     private String password;
+
+    @Column
     private Timestamp expiredDate;
+
+    @Column
     private int loginAttempts;
 
+    @JoinColumn
+    @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
     public long getId() {

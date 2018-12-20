@@ -32,6 +32,8 @@ public class WorkerDaoImplTest {
 
         workerDao.delete(worker.getId());
         assertNull(workerDao.find(worker.getId()));
+
+        System.out.println("worker ID: " + worker.getId());
     }
 
     @Test

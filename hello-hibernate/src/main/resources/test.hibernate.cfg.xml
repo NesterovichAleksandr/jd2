@@ -14,16 +14,33 @@
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
-        <mapping resource="by/pvt/pojo/Person.hbm.xml"/>
+        <!--<mapping resource="by/pvt/pojo/Person.hbm.xml"/>-->
         <!--<mapping resource="by/pvt/pojo/Address.hbm.xml"/>-->
-        <mapping resource="by/pvt/pojo/Company.hbm.xml"/>
-        <mapping resource="by/pvt/pojo/User.hbm.xml"/>
-        <mapping resource="by/pvt/pojo/UserDetails.hbm.xml"/>
-        <mapping resource="by/pvt/pojo/Department.hbm.xml"/>
-        <mapping resource="by/pvt/pojo/Employee.hbm.xml"/>
-        <mapping resource="by/pvt/pojo/EmployeeDatails.hbm.xml"/>
-        <mapping resource="by/pvt/pojo/Meeting.hbm.xml"/>
+        <!--<mapping resource="by/pvt/pojo/Company.hbm.xml"/>-->
+        <!--<mapping resource="by/pvt/pojo/User.hbm.xml"/>-->
+        <!--<mapping resource="by/pvt/pojo/UserDetails.hbm.xml"/>-->
+        <!--<mapping resource="by/pvt/pojo/Department.hbm.xml"/>-->
+        <!--<mapping resource="by/pvt/pojo/Employee.hbm.xml"/>-->
+        <!--<mapping resource="by/pvt/pojo/EmployeeDatails.hbm.xml"/>-->
+        <!--<mapping resource="by/pvt/pojo/Meeting.hbm.xml"/>-->
+
         <mapping class="by.pvt.pojo.Address"/>
+        <mapping class="by.pvt.pojo.Company"/>
+        <mapping class="by.pvt.pojo.Department"/>
+        <mapping class="by.pvt.pojo.Employee"/>
+        <mapping class="by.pvt.pojo.EmployeeDetails"/>
+        <mapping class="by.pvt.pojo.Meeting"/>
+        <mapping class="by.pvt.pojo.Person"/>
+        <mapping class="by.pvt.pojo.User"/>
+        <mapping class="by.pvt.pojo.UserDetails"/>
+
+        <mapping class="by.pvt.pojo.Branch"/>
+        <mapping class="by.pvt.pojo.Employer"/>
+        <mapping class="by.pvt.pojo.HeadQuarter"/>
+        <mapping class="by.pvt.pojo.Student"/>
+        <mapping class="by.pvt.pojo.Worker"/>
+
+
 
 
     </session-factory>

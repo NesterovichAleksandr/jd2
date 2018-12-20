@@ -20,6 +20,9 @@ public class AddressTest {
     @Test
     public void getId() {
         Address address = new Address("Minsk", "Stroiteley", "5", 24);
+
+        System.out.println("address id: " + address.getId());
+
         try {
             session.beginTransaction();
             session.saveOrUpdate(address);

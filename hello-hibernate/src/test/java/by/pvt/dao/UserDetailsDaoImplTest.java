@@ -32,30 +32,32 @@ public class UserDetailsDaoImplTest {
         userDetailsDao.saveOrUpdate(userDetails);
 
         assertTrue(userDetails.getId() > 0);
+
+        System.out.println("userDetails ID: " + userDetails.getId());
     }
 
     @Test
     public void step2_findUserDetails() {
-        assertNotNull(userDetailsDao.find(2L));
+        assertNotNull(userDetailsDao.find(29L));
     }
 
     @Test
     public void step3_updateUserDetails() {
-        UserDetails userDetails = userDetailsDao.load(2L);
+        UserDetails userDetails = userDetailsDao.load(29L);
         assertEquals("PasswordDaoTest", userDetails.getPassword());
 
         userDetails.setPassword("New PasswordDaoTest");
         userDetailsDao.saveOrUpdate(userDetails);
 
-        UserDetails testUserDetails = userDetailsDao.load(2L);
+        UserDetails testUserDetails = userDetailsDao.load(29L);
         assertEquals("New PasswordDaoTest", testUserDetails.getPassword());
 
     }
 
     @Test
     public void step4_deleteUserDetails() {
-        userDetailsDao.delete(2L);
-        assertNull(userDetailsDao.find(2L));
+        userDetailsDao.delete(29L);
+        assertNull(userDetailsDao.find(29L));
     }
 
     @After

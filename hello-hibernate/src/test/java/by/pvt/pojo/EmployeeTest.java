@@ -86,6 +86,9 @@ public class EmployeeTest {
             session.getTransaction().rollback();
             session.close();
         }
+        System.out.println("employee1 ID: " + employee1.getId());
+        System.out.println("employee2 ID: " + employee2.getId());
+        System.out.println("employee3 ID: " + employee3.getId());
     }
 
     @After

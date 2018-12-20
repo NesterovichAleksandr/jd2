@@ -1,19 +1,32 @@
 package by.pvt.pojo;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
+@Entity
 public class Meeting {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
-    private String subject;
-    private Employee organiser;
-    private Set attendees;
 
+    @Column
+    private String subject;
+
+    @JoinColumn
+    @OneToOne(cascade = CascadeType.ALL)
+    private Employee organiser;
+
+    @JoinColumn
+    @ManyToMany//(mappedBy = "meetings")
+    private Set<Person> attendees;
+
+    @Column
     private Date dateTime;
 
+    @Column
     private Status status;
-
 
     public long getId() {
         return id;

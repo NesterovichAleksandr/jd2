@@ -1,12 +1,20 @@
 package by.pvt.pojo;
 
+import javax.persistence.*;
 import java.util.Set;
 
+@Entity
 public class Department {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
+
+    @Column
     private String departmentName;
 
+    @JoinColumn
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Employee> employees;
 
     public long getId() {

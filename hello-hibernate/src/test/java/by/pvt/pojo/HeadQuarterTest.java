@@ -33,6 +33,7 @@ public class HeadQuarterTest {
             e.printStackTrace();
             session.getTransaction().rollback();
         }
+        System.out.println("headQuarter ID: " + headQuarter.getId());
     }
 
     @After

@@ -9,9 +9,7 @@ import org.junit.runners.MethodSorters;
 
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EmployeeDaoImplTest {
@@ -84,22 +82,26 @@ public class EmployeeDaoImplTest {
         employeeDao.saveOrUpdate(employee2);
         employeeDao.saveOrUpdate(employee3);
 
-        assertEquals(1, employee1.getId());
-        assertEquals(2, employee2.getId());
-        assertEquals(3, employee3.getId());
+        assertTrue(employee1.getId() > 0);
+        assertTrue(employee2.getId() > 0);
+        assertTrue(employee3.getId() > 0);
+
+        System.out.println("employee1 ID: " + employee1.getId());
+        System.out.println("employee2 ID: " + employee2.getId());
+        System.out.println("employee3 ID: " + employee3.getId());
     }
 
     @Test
     public void step2_findEmployee() {
-        Employee employee = employeeDao.find(1L);
+        Employee employee = employeeDao.find(8L);
         assertNotNull(employee);
     }
 
     @Test
     public void step3_updateEmployee() {
-        Employee employee1 = employeeDao.load(1L);
-        Employee employee2 = employeeDao.load(2L);
-        Employee employee3 = employeeDao.load(3L);
+        Employee employee1 = employeeDao.load(8L);
+        Employee employee2 = employeeDao.load(10L);
+        Employee employee3 = employeeDao.load(15L);
 
         Department department1 = employee1.getDepartment();
         Department department2 = employee3.getDepartment();
@@ -112,9 +114,9 @@ public class EmployeeDaoImplTest {
         employeeDao.saveOrUpdate(employee2);
         employeeDao.saveOrUpdate(employee3);
 
-        Employee employee4 = employeeDao.load(1L);
-        Employee employee5 = employeeDao.load(2L);
-        Employee employee6 = employeeDao.load(3L);
+        Employee employee4 = employeeDao.load(8L);
+        Employee employee5 = employeeDao.load(10L);
+        Employee employee6 = employeeDao.load(15L);
 
         assertEquals(employee4.getDepartment(), department2);
         assertEquals(employee5.getDepartment(), department2);
@@ -123,23 +125,23 @@ public class EmployeeDaoImplTest {
 
     @Test
     public void step4_deleteEmployees() {
-        Employee employee = employeeDao.load(1L);
+        Employee employee = employeeDao.load(8L);
         employee.getDepartment().setEmployees(null);
 
-        Employee employee2 = employeeDao.load(2L);
+        Employee employee2 = employeeDao.load(10L);
         employee2.getDepartment().setEmployees(null);
 
-        Employee employee3 = employeeDao.load(3L);
+        Employee employee3 = employeeDao.load(15L);
         employee3.getDepartment().setEmployees(null);
 
-        employeeDao.delete(1L);
-        assertNull(employeeDao.find(1L));
+        employeeDao.delete(8L);
+        assertNull(employeeDao.find(8L));
 
-        employeeDao.delete(2L);
-        assertNull(employeeDao.find(2L));
+        employeeDao.delete(10L);
+        assertNull(employeeDao.find(10L));
 
-        employeeDao.delete(3L);
-        assertNull(employeeDao.find(3L));
+        employeeDao.delete(15L);
+        assertNull(employeeDao.find(15L));
     }
 
     @After

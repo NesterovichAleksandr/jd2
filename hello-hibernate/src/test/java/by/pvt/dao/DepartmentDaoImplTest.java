@@ -24,30 +24,33 @@ public class DepartmentDaoImplTest {
         departmentDao.saveOrUpdate(department);
 
         assertTrue(department.getId() > 0);
+
+        System.out.println("department ID: " + department.getId());
+
     }
 
     @Test
     public void step2_findDepartment() {
-        assertNotNull(departmentDao.find(1L));
+        assertNotNull(departmentDao.find(7L));
     }
 
     @Test
     public void step3_updateDepartment() {
-        Department department = departmentDao.load(1L);
+        Department department = departmentDao.load(7L);
         assertEquals("DepartmentNameDaoTest", department.getDepartmentName());
 
         department.setDepartmentName("New DepartmentNameDaoTest");
         departmentDao.saveOrUpdate(department);
 
-        Department testDepartment = departmentDao.load(1L);
+        Department testDepartment = departmentDao.load(7L);
         assertEquals("New DepartmentNameDaoTest", testDepartment.getDepartmentName());
 
     }
 
     @Test
     public void step4_deleteDepartment() {
-        departmentDao.delete(1L);
-        assertNull(departmentDao.find(1L));
+        departmentDao.delete(7L);
+        assertNull(departmentDao.find(7L));
     }
 
     @After

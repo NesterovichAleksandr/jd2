@@ -1,12 +1,26 @@
 package by.pvt.pojo;
 
+import javax.persistence.*;
+
+@Entity
 public class EmployeeDetails {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
+
+    @JoinColumn
+    @ManyToOne(cascade = CascadeType.ALL)
     private Address address;
+
+    @Column
     private String position;
+
+    @Column
     private String privateNr;
 
+    @JoinColumn
+    @OneToOne(cascade = CascadeType.ALL)
     private Employee employee;
 
     public long getId() {

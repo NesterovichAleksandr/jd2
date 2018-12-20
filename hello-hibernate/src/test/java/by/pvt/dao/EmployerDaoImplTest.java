@@ -30,6 +30,8 @@ public class EmployerDaoImplTest {
 
         employerDao.delete(employer.getId());
         assertNull(employerDao.find(employer.getId()));
+
+        System.out.println("employer ID: " + employer.getId());
     }
 
     @Test
