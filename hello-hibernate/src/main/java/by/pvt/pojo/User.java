@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column
@@ -15,7 +15,6 @@ public class User {
     @Column
     private String userEmail;
 
-    @JoinColumn
     @OneToOne(cascade = CascadeType.ALL)
     private UserDetails userDetails;
 

@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Company {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column
@@ -15,13 +15,9 @@ public class Company {
     @Column
     private String siteUrl;
 
-    @JoinColumn
-    //@ManyToOne
     @OneToOne(cascade = CascadeType.ALL)
     private Address homeAddress;
 
-    @JoinColumn
-    //@ManyToOne
     @OneToOne(cascade = CascadeType.ALL)
     private Address legalAddress;
 

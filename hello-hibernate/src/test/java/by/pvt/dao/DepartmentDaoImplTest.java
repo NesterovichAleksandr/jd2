@@ -31,26 +31,26 @@ public class DepartmentDaoImplTest {
 
     @Test
     public void step2_findDepartment() {
-        assertNotNull(departmentDao.find(7L));
+        assertNotNull(departmentDao.find(1L));
     }
 
     @Test
     public void step3_updateDepartment() {
-        Department department = departmentDao.load(7L);
+        Department department = departmentDao.load(1L);
         assertEquals("DepartmentNameDaoTest", department.getDepartmentName());
 
         department.setDepartmentName("New DepartmentNameDaoTest");
         departmentDao.saveOrUpdate(department);
 
-        Department testDepartment = departmentDao.load(7L);
+        Department testDepartment = departmentDao.load(1L);
         assertEquals("New DepartmentNameDaoTest", testDepartment.getDepartmentName());
 
     }
 
     @Test
     public void step4_deleteDepartment() {
-        departmentDao.delete(7L);
-        assertNull(departmentDao.find(7L));
+        departmentDao.delete(1L);
+        assertNull(departmentDao.find(1L));
     }
 
     @After

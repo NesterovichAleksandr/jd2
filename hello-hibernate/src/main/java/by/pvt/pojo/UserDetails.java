@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 public class UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column
@@ -19,7 +19,6 @@ public class UserDetails {
     @Column
     private int loginAttempts;
 
-    @JoinColumn
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
 

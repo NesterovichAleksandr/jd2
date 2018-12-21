@@ -7,13 +7,12 @@ import java.util.Set;
 public class Department {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column
     private String departmentName;
 
-    @JoinColumn
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Employee> employees;
 

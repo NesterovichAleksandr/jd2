@@ -30,26 +30,26 @@ public class BranchDaoImplTest {
 
     @Test
     public void step2_findBranch() {
-        assertNotNull(branchDao.find(2L));
+        assertNotNull(branchDao.find(1L));
     }
 
     @Test
     public void step3_updateBranch() {
-        Branch branch = branchDao.load(2L);
+        Branch branch = branchDao.load(1L);
         assertEquals("BranchNameDaoTest", branch.getBranchName());
 
         branch.setBranchDirector("BranchDirectorDaoTest");
         branchDao.saveOrUpdate(branch);
 
-        Branch testBranch = branchDao.load(2L);
+        Branch testBranch = branchDao.load(1L);
         assertEquals("BranchDirectorDaoTest", testBranch.getBranchDirector());
 
     }
 
     @Test
     public void step4_deleteBranch() {
-        branchDao.delete(2L);
-        assertNull(branchDao.find(2L));
+        branchDao.delete(1L);
+        assertNull(branchDao.find(1L));
     }
 
     @After

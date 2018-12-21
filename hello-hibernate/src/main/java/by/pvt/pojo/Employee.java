@@ -7,7 +7,7 @@ import java.util.Set;
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column
@@ -19,15 +19,12 @@ public class Employee {
     @Column
     private String cellPhone;
 
-    @JoinColumn
     @ManyToOne(cascade = CascadeType.ALL)
     private Department department;
 
-    @JoinColumn
     @OneToOne(cascade = CascadeType.ALL)
     private EmployeeDetails employeeDetails;
 
-    @JoinColumn
     @ManyToMany(cascade = CascadeType.ALL)
 //    @ManyToMany
 //    @JoinTable(name = "employee_meeting",

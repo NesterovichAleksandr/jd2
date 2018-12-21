@@ -6,10 +6,9 @@ import javax.persistence.*;
 public class EmployeeDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @JoinColumn
     @ManyToOne(cascade = CascadeType.ALL)
     private Address address;
 
@@ -19,7 +18,6 @@ public class EmployeeDetails {
     @Column
     private String privateNr;
 
-    @JoinColumn
     @OneToOne(cascade = CascadeType.ALL)
     private Employee employee;
 

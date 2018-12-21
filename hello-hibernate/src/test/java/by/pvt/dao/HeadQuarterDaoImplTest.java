@@ -31,24 +31,24 @@ public class HeadQuarterDaoImplTest {
 
     @Test
     public void step2_findHeadQuarter() {
-        assertNotNull(headQuarterDao.find(21L));
+        assertNotNull(headQuarterDao.find(3L));
     }
 
     @Test
     public void step3_updateHeadQuarter() {
-        HeadQuarter testHeadQuarter = headQuarterDao.load(21L);
+        HeadQuarter testHeadQuarter = headQuarterDao.load(3L);
         assertNotNull(testHeadQuarter);
         testHeadQuarter.setBankAccount("New BankAccountDaoTest");
         headQuarterDao.saveOrUpdate(testHeadQuarter);
 
-        HeadQuarter testUpdateHeadQuarter = headQuarterDao.load(21L);
+        HeadQuarter testUpdateHeadQuarter = headQuarterDao.load(3L);
         assertEquals("New BankAccountDaoTest", testUpdateHeadQuarter.getBankAccount());
     }
 
     @Test
     public void step4_deleteHeadQuarter() {
-        headQuarterDao.delete(21L);
-        assertNull(headQuarterDao.find(21L));
+        headQuarterDao.delete(3L);
+        assertNull(headQuarterDao.find(3L));
     }
 
     @After
