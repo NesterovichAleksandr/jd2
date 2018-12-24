@@ -123,16 +123,19 @@ public class EmployeeDaoImplTest {
         assertEquals(employee6.getDepartment(), department1);
     }
 
-    @Ignore
+    @Test
     public void step4_deleteEmployees() {
         Employee employee = employeeDao.load(2L);
         employee.getDepartment().setEmployees(null);
+        employee.setDepartment(null);
 
         Employee employee2 = employeeDao.load(1L);
         employee2.getDepartment().setEmployees(null);
+        employee2.setDepartment(null);
 
         Employee employee3 = employeeDao.load(3L);
         employee3.getDepartment().setEmployees(null);
+        employee3.setDepartment(null);
 
         employeeDao.delete(2L);
         assertNull(employeeDao.find(2L));
