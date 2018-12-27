@@ -44,6 +44,20 @@ public class DaoImpl<T> {
         return t;
     }
 
+    public T update(T t) {
+        Session session = HibernateUtil.getInstance().getSession();
+        try {
+            session.beginTransaction();
+            session.update(t);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            session.close();
+        }
+        return t;
+    }
+
     public void delete(T t) {
         Session session = HibernateUtil.getInstance().getSession();
         try {

@@ -17,12 +17,21 @@ public class DaoImplTest {
     @Test
     public void create() {
         assertNotNull(dao.create(new Person()));
-        assertNotNull(dao.create(new Person(null,23,"David","Wilson")));
+        assertNotNull(dao.create(new Person(null, 23, "David", "Wilson")));
     }
 
     @Test
     public void read() {
         assertNotNull(dao.read(2));
+    }
+
+    @Test
+    public void update() {
+        Person person = dao.read(2);
+        person.setName("NewName");
+        dao.update(person);
+        Person testPerson = dao.read(2);
+        assertEquals("NewName", testPerson.getName());
     }
 
     @Test
