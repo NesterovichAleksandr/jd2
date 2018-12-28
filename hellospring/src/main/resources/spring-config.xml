@@ -1,0 +1,26 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean name="person" class="by.pvt.beans.PersonImpl">
+        <property name="address" ref="address"/>
+        <property name="name" value="Semen"/>
+        <property name="secondName" value="Gorbuncov"/>
+    </bean>
+
+    <bean name="address" class="by.pvt.beans.AddressImpl"/>
+    <bean name="personNotifier" class="by.pvt.beans.PersonNotifier"/>
+
+    <aop:config>
+        <aop:aspect ref="personNotifier">
+            <aop:pointcut id="personPointCut" expression="execution(* *.getName(..))"/>
+            <aop:before method="before" pointcut-ref="personPointCut"/>
+            <aop:after method="after" pointcut-ref="personPointCut"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>
