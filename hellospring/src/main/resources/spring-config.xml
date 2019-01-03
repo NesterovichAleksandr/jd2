@@ -1,19 +1,39 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <bean name="person" class="by.pvt.beans.PersonImpl">
+    <bean name="newPerson" id="person" class="by.pvt.beans.PersonImpl" scope="singleton"
+          init-method="init" destroy-method="destroy" p:secondName="Second Name">
         <property name="address" ref="address"/>
         <property name="name" value="Semen"/>
-        <property name="secondName" value="Gorbuncov"/>
+        <!--<property name="secondName" value="Gorbuncov"/>-->
     </bean>
 
-    <bean name="address" class="by.pvt.beans.AddressImpl"/>
-    <bean name="personNotifier" class="by.pvt.beans.PersonNotifier"/>
+    <bean name="address" class="by.pvt.beans.AddressImpl">
+        <property name="flats">
+            <list>
+                <value>1</value>
+                <value>2</value>
+                <value>3</value>
+            </list>
+        </property>
+        <property name="coordinaty">
+            <map>
+                <entry key="1.234" value="1.6342"/>
+                <entry key="2.35" value="2.56456"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean name="personNotifier" class="by.pvt.beans.PersonNotifier">
+        <constructor-arg value="My message"/>
+        <constructor-arg value="1,2,3"/>
+    </bean>
 
     <aop:config>
         <aop:aspect ref="personNotifier">
