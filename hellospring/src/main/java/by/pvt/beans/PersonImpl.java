@@ -6,9 +6,11 @@ import org.springframework.beans.factory.InitializingBean;
 
 public class PersonImpl implements InitializingBean, BeanNameAware, DisposableBean {
 
+    private long id;
     private String name;
     private String secondName;
     private Address address;
+    private String fullAddress;
 
     public PersonImpl() {
     }
@@ -17,6 +19,22 @@ public class PersonImpl implements InitializingBean, BeanNameAware, DisposableBe
         this.name = name;
         this.secondName = secondName;
         this.address = address;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getFullAddress() {
+        return fullAddress;
+    }
+
+    public void setFullAddress(String fullAddress) {
+        this.fullAddress = fullAddress;
     }
 
     public String getName() {
@@ -58,5 +76,10 @@ public class PersonImpl implements InitializingBean, BeanNameAware, DisposableBe
 
     public void setBeanName(String s) {
         System.out.println("setBeanName " + s);
+    }
+
+    @Override
+    public String toString() {
+        return "Person name" + "[" + name + "]";
     }
 }

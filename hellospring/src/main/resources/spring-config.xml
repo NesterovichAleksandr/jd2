@@ -1,20 +1,24 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/aop
-        http://www.springframework.org/schema/aop/spring-aop.xsd">
+        http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <bean name="newPerson" id="person" class="by.pvt.beans.PersonImpl" scope="singleton"
           init-method="init" destroy-method="destroy" p:secondName="Second Name">
         <property name="address" ref="address"/>
         <property name="name" value="Semen"/>
         <!--<property name="secondName" value="Gorbuncov"/>-->
+        <property name="fullAddress" value="#{address.street + address.home}"/>
     </bean>
 
     <bean name="address" class="by.pvt.beans.AddressImpl">
+        <constructor-arg>
+            <value>55</value>
+        </constructor-arg>
         <property name="flats">
             <list>
                 <value>1</value>
@@ -28,11 +32,55 @@
                 <entry key="2.35" value="2.56456"/>
             </map>
         </property>
+        <property name="home" value="#{5*25/2.0}"/>
+        <property name="street" value="#{'строителей '}"/>
+        <property name="zipCode" value="#{T(by.pvt.beans.ZipCode).DEFAULT_ZIP}"/>
+        <property name="endOfStreet" value="#{address.home gt 50 and address.home lt 60}"/>
+        <property name="endSameStreet" value="#{address.street eq 'строителей ' ? true : false}"/>
+        <property name="inhabitants" value="#{inhabitant.persons.![name]}"/>
     </bean>
 
     <bean name="personNotifier" class="by.pvt.beans.PersonNotifier">
         <constructor-arg value="My message"/>
         <constructor-arg value="1,2,3"/>
+    </bean>
+
+    <bean id="inhabitant" class="by.pvt.beans.Inhabitant">
+        <property name="persons">
+            <list>
+                <bean class="by.pvt.beans.PersonImpl">
+                    <property name="name" value="Name1"/>
+                    <property name="secondName" value="secondName1"/>
+                </bean>
+                <bean class="by.pvt.beans.PersonImpl">
+                    <property name="name" value="Name2"/>
+                    <property name="secondName" value="secondName2"/>
+                </bean>
+                <bean class="by.pvt.beans.PersonImpl">
+                    <property name="name" value="Name3"/>
+                    <property name="secondName" value="secondName3"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <util:list id="people">
+        <bean class="by.pvt.beans.PersonImpl" p:id="1" p:name="Name1"/>
+        <bean class="by.pvt.beans.PersonImpl" p:id="2" p:name="Name2"/>
+        <bean class="by.pvt.beans.PersonImpl" p:id="3" p:name="Name3"/>
+        <bean class="by.pvt.beans.PersonImpl" p:id="4" p:name="Name4"/>
+    </util:list>
+
+    <bean id="filter" class="by.pvt.beans.FilterPerson">
+        <property name="property" value="#{people.$[id gt 1].name}"/>
+        <property name="person" value="#{people.^[id gt 1]}"/>
+        <property name="persons" value="#{people.?[id gt 2]}"/>
+    </bean>
+
+    <bean id="manager" class="by.pvt.beans.Manager">
+        <property name="name" value="#{inhabitant.persons[0].name}"/>
+        <property name="secondName" value="#{inhabitant.persons[0].secondName}"/>
+        <property name="person" value="#{inhabitant.persons[0]}"/>
     </bean>
 
     <aop:config>
