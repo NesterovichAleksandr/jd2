@@ -4,6 +4,7 @@
 	<persistence-unit name="testPU" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>by.pvt.mvc.domain.Member</class>
+		<class>by.pvt.mvc.domain.Department</class>
         <properties>
 	        <property name="hibernate.hbm2ddl.auto" value="create-drop" />
         	<property name="hibernate.show_sql" value="true" />
